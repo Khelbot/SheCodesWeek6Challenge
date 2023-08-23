@@ -67,7 +67,7 @@ h2 {
   margin-left: 400px;
   text-shadow: 1px 1px 2px #9bc5f6;
 }
-.tempSymbol {
+.tempSymbolC {
   font-family: "Roboto", sans-serif;
   font-size: 30px;
   font-weight: 20px;
@@ -77,6 +77,15 @@ h2 {
   text-shadow: 1px 1px 2px #9bc5f6;
 }
 
+.tempSymbolF {
+  font-family: "Roboto", sans-serif;
+  font-size: 30px;
+  font-weight: 20px;
+  color: white;
+  position: relative;
+  top: -0px;
+  text-shadow: 1px 1px 2px #9bc5f6;
+}
 p {
   font-family: "Roboto", sans-serif;
   font-size: 25px;
@@ -337,4 +346,8 @@ svg {
   display: block;
 
   margin-left: 109px;
+}
+.source a {
+  color: darkblue;
+  text-decoration: none;
 }

@@ -74,10 +74,6 @@ function showSearchedLocationInfo(response) {
   let weatherDescription = response.data.weather[0].description;
   let humidityLevel = response.data.main.humidity;
   let windSpeed = response.data.wind.speed;
-  var span = document.querySelector(".tempSymbol");
-  let h2 = document.querySelector("h2");
-  h2.innerHTML = `${temperature}`;
-  h2.appendChild(span);
   let h1 = document.querySelector("h1");
   h1.innerHTML = city;
   var span = document.querySelector(".weather-description");
@@ -87,3 +83,30 @@ function showSearchedLocationInfo(response) {
   var span = document.querySelector(".wind-speed");
   span.innerHTML = `Winds ${windSpeed}mp/h`;
 }
+
+function displayFarenheightTemperature(event) {
+  event.preventDefault();
+  let temperature = document.querySelector("searched-temperature");
+  farenheightLink.classList.add("active");
+  celsiusLink.classList.remove("active");
+  let farenheightTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperature.innerHTML = Math.round(farenheightTemperature);
+}
+
+function displayCelsiusTemperature(event) {
+  event.preventDefault();
+  let temperature = document.querySelector("searched-temperature");
+  farenheightLink.classList.remove("active");
+  celsiusLink.classList.add("active");
+  temperature.innerHTML = Math.round(celsiusTemperature);
+}
+let celsiusTemperature = null;
+
+let form = document.querySelector("search-form");
+form.addEventListener("submit", getWeatherForCity);
+
+let farenheightLink = document.querySelector("tempSymbolF");
+farenheightLink.addEventListener("click", displayFarenheightTemperature);
+
+let celsiusLink = document.querySelector("tempSymbolC");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
