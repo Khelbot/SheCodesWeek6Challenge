@@ -41,7 +41,7 @@ currentButton.addEventListener("click", function (event) {
 });
 //Works!
 
-// Dispaley sarch input
+// Display search input
 function displaySearch(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#input-search-results");
@@ -70,12 +70,19 @@ searchButton.addEventListener("click", function () {
 //  Show Search Info
 function showSearchedLocationInfo(response) {
   let city = response.data.name;
-  let temperature = Math.round(response.data.main.temp);
   let weatherDescription = response.data.weather[0].description;
   let humidityLevel = response.data.main.humidity;
   let windSpeed = response.data.wind.speed;
   let h1 = document.querySelector("h1");
   h1.innerHTML = city;
+
+  let celsiusTemperature = response.data.main.temp;
+  let temperatureElement = Math.round(response.data.main.temp);
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+
+  let h2 = document.querySelector("h2");
+  h2.innerHTML = temperatureElement;
+
   var span = document.querySelector(".weather-description");
   span.innerHTML = weatherDescription;
   var span = document.querySelector(".humidity-level");
@@ -86,24 +93,24 @@ function showSearchedLocationInfo(response) {
 
 function displayFarenheightTemperature(event) {
   event.preventDefault();
-  let temperature = document.querySelector("searched-temperature");
-  farenheightLink.classList.add("active");
-  celsiusLink.classList.remove("active");
+  let temperatureElement = document.querySelector("searched-temperature");
+  farenheightLink.classList.add("#active");
+  celsiusLink.classList.remove("#active");
   let farenheightTemperature = (celsiusTemperature * 9) / 5 + 32;
-  temperature.innerHTML = Math.round(farenheightTemperature);
+
+  temperatureElement.innerHTML = Math.round(farenheightTemperature);
 }
 
 function displayCelsiusTemperature(event) {
   event.preventDefault();
-  let temperature = document.querySelector("searched-temperature");
-  farenheightLink.classList.remove("active");
-  celsiusLink.classList.add("active");
-  temperature.innerHTML = Math.round(celsiusTemperature);
-}
-let celsiusTemperature = null;
+  let temperatureElement = document.querySelector("searched-temperature");
+  farenheightLink.classList.remove("#active");
+  celsiusLink.classList.add("#active");
 
-let form = document.querySelector("search-form");
-form.addEventListener("submit", getWeatherForCity);
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+let celsiusTemperature = null;
 
 let farenheightLink = document.querySelector("tempSymbolF");
 farenheightLink.addEventListener("click", displayFarenheightTemperature);

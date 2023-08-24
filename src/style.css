@@ -66,6 +66,7 @@ h2 {
   padding: 0%;
   margin-left: 400px;
   text-shadow: 1px 1px 2px #9bc5f6;
+  text-decoration: none;
 }
 .tempSymbolC {
   font-family: "Roboto", sans-serif;
@@ -73,8 +74,9 @@ h2 {
   font-weight: 20px;
   color: white;
   position: relative;
-  top: -50px;
+
   text-shadow: 1px 1px 2px #9bc5f6;
+  text-decoration: none;
 }
 
 .tempSymbolF {
@@ -83,9 +85,11 @@ h2 {
   font-weight: 20px;
   color: white;
   position: relative;
-  top: -0px;
+
   text-shadow: 1px 1px 2px #9bc5f6;
+  text-decoration: none;
 }
+
 p {
   font-family: "Roboto", sans-serif;
   font-size: 25px;
