@@ -77,11 +77,8 @@ function showSearchedLocationInfo(response) {
   h1.innerHTML = city;
 
   let celsiusTemperature = response.data.main.temp;
-  let temperatureElement = Math.round(response.data.main.temp);
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
-
   let h2 = document.querySelector("h2");
-  h2.innerHTML = temperatureElement;
+  h2.innerHTML = Math.round(celsiusTemperature);
 
   var span = document.querySelector(".weather-description");
   span.innerHTML = weatherDescription;
@@ -94,8 +91,8 @@ function showSearchedLocationInfo(response) {
 function displayFarenheightTemperature(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("searched-temperature");
-  farenheightLink.classList.add("#active");
-  celsiusLink.classList.remove("#active");
+  farenheightLink.classList.add("active");
+  celsiusLink.classList.remove("active");
   let farenheightTemperature = (celsiusTemperature * 9) / 5 + 32;
 
   temperatureElement.innerHTML = Math.round(farenheightTemperature);
@@ -104,16 +101,19 @@ function displayFarenheightTemperature(event) {
 function displayCelsiusTemperature(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("searched-temperature");
-  farenheightLink.classList.remove("#active");
-  celsiusLink.classList.add("#active");
+  farenheightLink.classList.remove("active");
+  celsiusLink.classList.add("active");
 
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
 
 let celsiusTemperature = null;
 
-let farenheightLink = document.querySelector("tempSymbolF");
+let form = document.querySelector("search-form");
+form.addEventListener("submit", displaySearch);
+
+let farenheightLink = document.querySelector("#tempSymbolF");
 farenheightLink.addEventListener("click", displayFarenheightTemperature);
 
-let celsiusLink = document.querySelector("tempSymbolC");
+let celsiusLink = document.querySelector("#tempSymbolC");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
