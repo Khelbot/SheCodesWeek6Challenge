@@ -64,31 +64,44 @@ h2 {
   color: white;
   margin-top: 0%;
   padding: 0%;
-  margin-left: 400px;
+  position: relative;
+  left: 400px;
   text-shadow: 1px 1px 2px #9bc5f6;
   text-decoration: none;
 }
-.active {
+.link {
   font-family: "Roboto", sans-serif;
   font-size: 30px;
-  font-weight: 20px;
+  font-weight: normal;
   color: white;
   position: relative;
-  top: -50px;
-  text-shadow: none;
   text-decoration: none;
 }
-.active:hover {
-  color: #c8f1f8;
-}
 
-.line {
+.links {
+  font-family: "Roboto", sans-serif;
   font-size: 30px;
-  font-weight: 20px;
-  top: -50px;
+  font-weight: normal;
+  color: white;
   position: relative;
+  top: -110px;
+  left: 515px;
+  text-shadow: none;
+  text-decoration: none;
+  z-index: 2;
+}
+a {
+  position: relative;
+  color: #c8f1f8;
+  text-decoration: none;
 }
 
+a:hover {
+  opacity: 0.6;
+  transition: 150ms ease-in-out;
+  color: #c8f1f8;
+  cursor: pointer;
+}
 p {
   font-family: "Roboto", sans-serif;
   font-size: 25px;
@@ -167,6 +180,7 @@ button:hover {
   border-radius: 30px;
   transition: 150ms ease-in-out;
 }
+
 .scroll-div {
   width: 260px;
   background: none;
@@ -175,13 +189,6 @@ button:hover {
   overflow-y: scroll;
 }
 
-a {
-  position: relative;
-}
-a:hover {
-  opacity: 0.6;
-  transition: 150ms ease-in-out;
-}
 h3 {
   position: absolute;
   color: whitesmoke;

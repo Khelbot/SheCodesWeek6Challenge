@@ -88,32 +88,34 @@ function showSearchedLocationInfo(response) {
   span.innerHTML = `Winds ${windSpeed}mp/h`;
 }
 
-function displayFarenheightTemperature(event) {
+function displayFahrenheitTemperature(event) {
   event.preventDefault();
-  let temperatureElement = document.querySelector("searched-temperature");
-  farenheightLink.classList.add("active");
-  celsiusLink.classList.remove("active");
-  let farenheightTemperature = (celsiusTemperature * 9) / 5 + 32;
+  let temperatureElement = document.querySelector(".searched-temperature");
+  celsiusLink.classList.remove("link");
+  fahrenheitLink.classList.add("link");
 
-  temperatureElement.innerHTML = Math.round(farenheightTemperature);
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
 }
 
 function displayCelsiusTemperature(event) {
   event.preventDefault();
-  let temperatureElement = document.querySelector("searched-temperature");
-  farenheightLink.classList.remove("active");
-  celsiusLink.classList.add("active");
+  let temperatureElement = document.querySelector(".searched-temperature");
+  celsiusLink.classList.add("link");
+  fahrenheitLink.classList.remove("link");
 
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
 
 let celsiusTemperature = null;
 
-let form = document.querySelector("search-form");
+let form = document.querySelector(".search-form");
 form.addEventListener("submit", displaySearch);
 
-let farenheightLink = document.querySelector("#tempSymbolF");
-farenheightLink.addEventListener("click", displayFarenheightTemperature);
+let fahrenheitLink = document.querySelector("#tempSymbolF");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 
 let celsiusLink = document.querySelector("#tempSymbolC");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
+
+getWeatherForCity("Alaska");
