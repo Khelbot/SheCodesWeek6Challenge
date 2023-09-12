@@ -361,3 +361,13 @@ svg {
   color: darkblue;
   text-decoration: none;
 }
+
+.weather-icon .icon-specific {
+  width: 150px;
+  height: auto;
+  position: relative;
+  opacity: 0.5;
+  top: -310px;
+  right: 410px;
+  image-rendering: crisp-edges;
+}

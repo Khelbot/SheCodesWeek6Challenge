@@ -75,6 +75,8 @@ function showSearchedLocationInfo(response) {
   let weatherDescription = response.data.weather[0].description;
   let humidityLevel = response.data.main.humidity;
   let windSpeed = response.data.wind.speed;
+  let iconElement = document.querySelector("#icon");
+
   let h1 = document.querySelector("h1");
   h1.innerHTML = city;
 
@@ -89,6 +91,11 @@ function showSearchedLocationInfo(response) {
   span.innerHTML = `Humidity ${humidityLevel}%`;
   var span = document.querySelector(".wind-speed");
   span.innerHTML = `Winds ${windSpeed}mp/h`;
+  iconElement.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 function displayFahrenheitTemperature(event) {
