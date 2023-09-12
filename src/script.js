@@ -68,6 +68,8 @@ searchButton.addEventListener("click", function () {
 });
 
 //  Show Search Info
+
+let celsiusTemperature = null;
 function showSearchedLocationInfo(response) {
   let city = response.data.name;
   let weatherDescription = response.data.weather[0].description;
@@ -76,7 +78,8 @@ function showSearchedLocationInfo(response) {
   let h1 = document.querySelector("h1");
   h1.innerHTML = city;
 
-  let celsiusTemperature = response.data.main.temp;
+  celsiusTemperature = response.data.main.temp;
+
   let h2 = document.querySelector("h2");
   h2.innerHTML = Math.round(celsiusTemperature);
 
@@ -100,14 +103,12 @@ function displayFahrenheitTemperature(event) {
 
 function displayCelsiusTemperature(event) {
   event.preventDefault();
-  let temperatureElement = document.querySelector(".searched-temperature");
   celsiusLink.classList.add("link");
   fahrenheitLink.classList.remove("link");
 
+  let temperatureElement = document.querySelector(".searched-temperature");
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
-
-let celsiusTemperature = null;
 
 let form = document.querySelector(".search-form");
 form.addEventListener("submit", displaySearch);
