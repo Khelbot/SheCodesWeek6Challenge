@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+function updateTime() {
   let now = new Date();
   let hours = now.getHours();
   if (hours < 10) {
@@ -7,6 +7,14 @@ document.addEventListener("DOMContentLoaded", function () {
   let minutes = now.getMinutes();
   if (minutes < 10) {
     minutes = `0${minutes}`;
+  }
+  if (hours >= 12) {
+    ampm = "PM";
+    if (hours > 12) {
+      hours -= 12;
+    }
+  } else {
+    ampm = "AM"; // Initialize ampm for the morning
   }
   let days = [
     "Sunday",
@@ -18,20 +26,32 @@ document.addEventListener("DOMContentLoaded", function () {
     "Saturday",
   ];
   let day = days[now.getDay()];
-  let message = `${day}, ${hours}:${minutes}`;
+  let message = `${day}, ${hours}:${minutes}${ampm}`;
   let time = document.querySelector("#time");
-  time.innerHTML = message;
-});
-//Works!
+  time.innerHTML = message; // the time for searched cities doessnt update.
+}
+// Does not work:(
+
+// Dark mode based on time of day in city
+function changeTheme() {
+  if (isNight()) {
+    document.body.classList.add("dark-mode");
+  } else {
+    document.body.classList.remove("dark-mode");
+  }
+  changeTheme();
+}
+// Does not work:(
+
 let apiKey = "1d038ee28ef2727a9f0310860ac10ae9";
 // Works!
+
 //  Show Current Info
 function showCurrentLocationInfo(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let units = "metric";
   let currentApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
-
   axios.get(currentApiUrl).then(showSearchedLocationInfo);
 }
 let currentButton = document.querySelector("#current-button");
@@ -67,9 +87,8 @@ searchButton.addEventListener("click", function () {
   navigator.geolocation.getCurrentPosition(getWeatherForCity);
 });
 
-//  Show Search Info
-
 let celsiusTemperature = null;
+//  Show Search Info
 function showSearchedLocationInfo(response) {
   let city = response.data.name;
   let weatherDescription = response.data.weather[0].description;
@@ -96,6 +115,8 @@ function showSearchedLocationInfo(response) {
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  updateTime(); // do I need this?
 }
 
 function displayFahrenheitTemperature(event) {
@@ -107,6 +128,7 @@ function displayFahrenheitTemperature(event) {
   let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
   temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
 }
+// Works!
 
 function displayCelsiusTemperature(event) {
   event.preventDefault();
@@ -116,6 +138,7 @@ function displayCelsiusTemperature(event) {
   let temperatureElement = document.querySelector(".searched-temperature");
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
+// Works!
 
 let form = document.querySelector(".search-form");
 form.addEventListener("submit", displaySearch);
@@ -127,3 +150,4 @@ let celsiusLink = document.querySelector("#tempSymbolC");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 getWeatherForCity("Alaska");
+// Works! Although I do not think the time is accurate to Alaska
