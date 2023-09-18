@@ -61,34 +61,57 @@ currentButton.addEventListener("click", function (event) {
 });
 //Works!
 
-// Display Weather Forecast
-function displayForecast() {
-  let forecastElement = document.querySelector("#forecast");
+//Gets the date for forecast
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  forecastHTML = `<div class="row">`;
 
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
-  <div class="row">
-    <div class="col-3">
-      <div class="weather-forecast-date"> ${day}</div>
-      <img
-        src="https://openweathermap.org/img/wn/10d@2x.png"
+  return days[day];
+}
+
+// Display Weather Forecast
+function displayForecast(response) {
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#forecast");
+
+  forecastHTML = `<div class="row">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
+
+    <div class="col-2">
+      <div class="weather-forecast-date"> ${formatDay(forecastDay.dt)}</div><img
+        src="https://openweathermap.org/img/wn/${
+          forecastDay.weather[0].icon
+        }@2x.png"
         alt=""
-        width="56px"
-      />
-      <div class="weather-forecast-temperatures">
-        <span class="weather-forecast-temperature-max">18°</span>
-        <span class="weather-forecast-temperature-min">12°</span>
-      </div>
+        width="76px"
+      /> 
+      <div class="weather-forecast-temperatures"> 
+  <span class="weather-forecast-temperature-max">${Math.round(
+    forecastDay.temp.max
+  )}° </span> 
+  <span class="weather-forecast-temperature-min">${Math.round(
+    forecastDay.temp.min
+  )}°</span>
+</div>
     </div>
   </div>`;
+    }
   });
+
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
-  console.log(forecastHTML);
+}
+
+//Forecast API Call
+function getForecast(coordinates) {
+  let apiKey = "1d038ee28ef2727a9f0310860ac10ae9";
+  let forecastApiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(forecastApiURL).then(displayForecast);
 }
 
 // Display search input
@@ -147,6 +170,8 @@ function showSearchedLocationInfo(response) {
   iconElement.setAttribute("alt", response.data.weather[0].description);
 
   updateTime(); // do I need this?
+
+  getForecast(response.data.coord);
 }
 
 function displayFahrenheitTemperature(event) {
@@ -181,5 +206,3 @@ celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 getWeatherForCity("Alaska");
 // Works! Although I do not think the time is accurate to Alaska
-
-displayForecast();
