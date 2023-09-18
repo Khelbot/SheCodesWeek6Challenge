@@ -18,13 +18,7 @@ body {
   width: 100vw;
   background-size: cover;
 }
-.material-symbols-outlined {
-  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
-  font-size: 270px;
-  color: #f8da5b;
-  opacity: 0.8;
-  left: -40px;
-}
+
 .background-image1 {
   scale: 5%;
   position: relative;
@@ -309,27 +303,7 @@ h4 {
 svg {
   left: -30px;
 }
-.sun {
-  position: relative;
-  height: 120px;
-  width: 160px;
-  top: 20px;
-  padding: 0;
-}
-.wind {
-  position: relative;
-  top: 25px;
-  height: 120px;
-  width: 150px;
-  fill: white;
-}
 
-.cloud {
-  position: relative;
-  top: 25px;
-  height: 120px;
-  width: 150px;
-}
 .dow {
   font-family: "Roboto", sans-serif;
   font-size: 20px;
@@ -340,11 +314,7 @@ svg {
   padding-top: 6px;
   text-shadow: none;
 }
-.dow:hover {
-  transform: scale(1.5);
-  transition: 150ms ease-in-out;
-  cursor: pointer;
-}
+
 .temp {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
@@ -354,18 +324,14 @@ svg {
   margin-top: 15px;
   text-shadow: none;
 }
-.temp:hover {
-  transform: scale(1.5);
-  transition: 150ms ease-in-out;
-  cursor: pointer;
-}
+
 .source {
   font-family: "Roboto", sans-serif;
   font-size: 11px;
   color: white;
   display: block;
 
-  margin-left: 109px;
+  text-align: center;
 }
 .source a {
   color: darkblue;
@@ -380,4 +346,23 @@ svg {
   top: -310px;
   right: 410px;
   image-rendering: crisp-edges;
+}
+
+.weather-forecast {
+  margin-left: 400px;
+  margin-top: -200px;
+  text-align: center;
+  z-index: 8;
+}
+.weather-forecast-date {
+  font-size: 16px;
+  color: black;
+  opacity: 0.5;
+}
+
+.weather-forecast-temperatures {
+  font-size: 13px;
+}
+.weather-forecast-temperature-min {
+  opacity: 0.5;
 }
