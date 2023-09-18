@@ -50,7 +50,7 @@ let apiKey = "1d038ee28ef2727a9f0310860ac10ae9";
 function showCurrentLocationInfo(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
-  let units = "metric";
+  let units = "imperial";
   let currentApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
   axios.get(currentApiUrl).then(showSearchedLocationInfo);
 }
@@ -110,7 +110,7 @@ function displayForecast(response) {
 //Forecast API Call
 function getForecast(coordinates) {
   let apiKey = "1d038ee28ef2727a9f0310860ac10ae9";
-  let forecastApiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  let forecastApiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
   axios.get(forecastApiURL).then(displayForecast);
 }
 
@@ -130,7 +130,7 @@ searchInput.addEventListener("submit", displaySearch);
 //Works!
 
 function getWeatherForCity(cityName) {
-  let units = "metric";
+  let units = "imperial";
   let searchApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=${units}`;
 
   axios.get(searchApiUrl).then(showSearchedLocationInfo);
@@ -140,7 +140,7 @@ searchButton.addEventListener("click", function () {
   navigator.geolocation.getCurrentPosition(getWeatherForCity);
 });
 
-let celsiusTemperature = null;
+// //let celsiusTemperature = null;
 //  Show Search Info
 function showSearchedLocationInfo(response) {
   let city = response.data.name;
@@ -174,35 +174,35 @@ function showSearchedLocationInfo(response) {
   getForecast(response.data.coord);
 }
 
-function displayFahrenheitTemperature(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector(".searched-temperature");
-  celsiusLink.classList.remove("link");
-  fahrenheitLink.classList.add("link");
+//function displayFahrenheitTemperature(event) {
+// event.preventDefault();
+// let temperatureElement = document.querySelector(".searched-temperature");
+// celsiusLink.classList.remove("link");
+// fahrenheitLink.classList.add("link");
 
-  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
-}
+// let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+// temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+// }
 // Works!
 
-function displayCelsiusTemperature(event) {
-  event.preventDefault();
-  celsiusLink.classList.add("link");
-  fahrenheitLink.classList.remove("link");
+// function displayCelsiusTemperature(event) {
+// event.preventDefault();
+// celsiusLink.classList.add("link");
+// fahrenheitLink.classList.remove("link");
 
-  let temperatureElement = document.querySelector(".searched-temperature");
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
-}
+// let temperatureElement = document.querySelector(".searched-temperature");
+// temperatureElement.innerHTML = Math.round(celsiusTemperature);
+// }
 // Works!
 
 let form = document.querySelector(".search-form");
 form.addEventListener("submit", displaySearch);
 
-let fahrenheitLink = document.querySelector("#tempSymbolF");
-fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+// let fahrenheitLink = document.querySelector("#tempSymbolF");
+// fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 
-let celsiusLink = document.querySelector("#tempSymbolC");
-celsiusLink.addEventListener("click", displayCelsiusTemperature);
+//let celsiusLink = document.querySelector("#tempSymbolC");
+//celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 getWeatherForCity("Alaska");
 // Works! Although I do not think the time is accurate to Alaska

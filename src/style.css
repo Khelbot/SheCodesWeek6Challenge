@@ -74,14 +74,14 @@ h2 {
   text-shadow: 1px 1px 2px #9bc5f6;
   text-decoration: none;
 }
-.link {
+/*.link {
   font-family: "Roboto", sans-serif;
   font-size: 30px;
   font-weight: normal;
   color: white;
   position: relative;
   text-decoration: none;
-}
+}  (turn on with both Celcius and Farenheit*/
 
 .links {
   font-family: "Roboto", sans-serif;
